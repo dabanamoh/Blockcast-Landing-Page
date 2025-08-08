@@ -121,8 +121,8 @@ const BlockcastWebsite = () => {
           </div>
 
           {/* Right Section - Join Form */}
-          <div>
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-12">
+          <div className=' max-w-sm md:max-w-lg mx-auto lg:mx-0'>
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-12 w-full">
             <div className="text-cyan-400 text-xs font-semibold tracking-wider uppercase mb-6 text-center flex items-center justify-center gap-2">
               <span>•</span>
               EARLY ACCESS
@@ -157,22 +157,22 @@ const BlockcastWebsite = () => {
               {isSubmitted ? 'JOINED!' : 'NOTIFY ME'}
             </button>
 
-        </div>
-         {/* Feature Pillars */}
-         <div className="flex justify-center gap-32 mt-20 mb-16">
-          <div className="text-center">
-            <div className="text-lg font-semibold mb-2 tracking-wide text-cyan-400">PREDICTIONS</div>
-            <div className="text-gray-500 text-xs uppercase tracking-widest font-medium">FUTURE OUTCOMES</div>
           </div>
-          <div className="text-center">
-            <div className="text-lg font-semibold mb-2 tracking-wide text-purple-600">TRUTH</div>
-            <div className="text-gray-500 text-xs uppercase tracking-widest font-medium">VALIDATION</div>
-          </div>
-          <div className="text-center">
-            <div className="text-lg font-semibold mb-2 tracking-wide text-gray-300">CULTURE</div>
-            <div className="text-gray-500 text-xs uppercase tracking-widest font-medium">POWERED</div>
-          </div>
-        </div>
+            {/* Feature Pillars */}
+            <div className="flex justify-between mt-20 mb-16 w-full">
+              <div className="text-center">
+                <div className="md:text-lg font-semibold mb-2 tracking-wide text-cyan-400 text-sm">PREDICTIONS</div>
+                <div className="text-gray-500 text-xs uppercase tracking-widest font-medium">FUTURE OUTCOMES</div>
+              </div>
+              <div className="text-center">
+                <div className="md:text-lg font-semibold mb-2 tracking-wide text-purple-600 text-sm">TRUTH</div>
+                <div className="text-gray-500 text-xs uppercase tracking-widest font-medium">VALIDATION</div>
+              </div>
+              <div className="text-center">
+                <div className="md:text-lg font-semibold mb-2 tracking-wide text-gray-300 text-sm">CULTURE</div>
+                <div className="text-gray-500 text-xs uppercase tracking-widest font-medium">POWERED</div>
+              </div>
+            </div>
           </div>
         </main>
 
