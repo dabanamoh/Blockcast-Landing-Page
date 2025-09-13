@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import BlockcastWebsite from '../Components/BlockcastWebsite';
 import logo from '../assets/logo.svg';
 import glow from '../assets/Glow.png';
-import phoneImage from '../assets/Phone-Phone-still.gif';
+// Removed phoneImage import as we're now using it from the public folder
 import aiPoweredSvg from '../assets/AI Powered.svg';
 import ultraLowFeesSvg from '../assets/Ultra-Low Fees.svg';
 import decentralizedImmutableSvg from '../assets/Decentralized & Immutable.svg';
@@ -271,7 +271,7 @@ const CombinedLandingPage = () => {
                 
                 <div className="md:w-1/2 flex justify-center py-2 md:py-4 relative">
                   <img 
-                    src={phoneImage} 
+                    src="/assets/Phone-Phone-still.gif" 
                     alt="BlockCast App Preview" 
                     className="max-w-full h-auto rounded-lg shadow-2xl"
                     style={{ transform: 'scale(0.86)', transformOrigin: 'center' }}
