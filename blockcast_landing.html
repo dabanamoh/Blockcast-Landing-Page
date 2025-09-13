@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlockCast - AI Powered Truth Verification</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .track-info {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255,107,107,0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255,107,107,0.4);
+        }
+
+        .section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid #ff6b6b;
+            transition: transform 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .stat-highlight {
+            color: #ff6b6b;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .value-props {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 40px 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid #667eea;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+
+        .value-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .steps-container {
+            position: relative;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateX(10px);
+        }
+
+        .step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 30px;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .step-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-content li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .step-content li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .footer h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hedera-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 10px 5px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .step {
+                flex-direction: column !important;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin: 0 0 20px 0;
+            }
+            
+            .problem-grid,
+            .value-props {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="track-info">
+                    🔗 Track: AI & DePIN | Sub-track: AI Agents on Hedera
+                </div>
+                <h1>🚀 BlockCast</h1>
+                <p class="hero-subtitle">AI Powered Truth Verification on Hedera</p>
+                <p style="font-size: 1.3rem; margin-bottom: 30px; opacity: 0.9;">Transform collective intelligence into accurate news, data and income with Hedera's enterprise-grade DLT</p>
+                <div class="hedera-badge">🔒 Decentralized & Immutable</div>
+                <div class="hedera-badge">🤖 AI Powered Verification</div>
+                <div class="hedera-badge">💰 Ultra-Low Fees (~$0.0001/tx)</div>
+                <div class="hedera-badge">⚡ Real-Time Evidence</div>
+                <div class="hedera-badge">🛡️ Enterprise-Grade Security</div>
+                <div class="hedera-badge">📱 Easy Crypto Onboarding</div>
+                <br><br>
+                <a href="#how-it-works" class="cta-button">Start Fighting Misinformation</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">The Misinformation Crisis</h2>
+            <p style="text-align: center; font-size: 1.3rem; margin-bottom: 40px; color: #666;">
+                Misinformation is not just a media problem, it is a community crisis
+            </p>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>Global Economic Impact</h3>
+                    <p>Misinformation is a top global risk costing <span class="stat-highlight">$78 billion</span> annually according to the World Economic Forum.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>African Media Dependence</h3>
+                    <p><span class="stat-highlight">400M+ Africans</span> rely on social media for news, which is often centralized and biased.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Political Manipulation</h3>
+                    <p><span class="stat-highlight">$22.7 million</span> was spent on political fake news in Kenya & South Africa alone.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Slow Traditional Fact-Checking</h3>
+                    <p>Traditional fact-checking is centralized, unreliable and slow to respond to viral misinformation.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Economic Consequences</h3>
+                    <p>Disinformation causes market volatility, reduced investment, hindered trade, and increased governance costs.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Clickbait Over Truth</h3>
+                    <p>Viral emotions win clicks while accuracy gets ignored - this is Big Tech's current strategy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Our Solution: Hedera-Powered Truth Verification</h2>
+            <div class="value-props">
+                <div class="value-card">
+                    <div class="value-icon">🔗</div>
+                    <h3>Decentralized & Immutable</h3>
+                    <p>Hedera's aBFT consensus makes every record decentralized, verifiable, and immutable.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🤖</div>
+                    <h3>AI Powered</h3>
+                    <p>Advanced AI ensures actions are time-stamped, immutable, and auditable with built-in accountability.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">💰</div>
+                    <h3>Ultra-Low Fees</h3>
+                    <p>Fees as low as ~$0.0001/tx, unaffected by token price swings.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">⚡</div>
+                    <h3>Real-Time Forecasting</h3>
+                    <p>Live evidence submission via HCS topics for instant truth verification.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🛡️</div>
+                    <h3>Safe & Compliant</h3>
+                    <p>Decentralized network governed by 39 trusted organizations worldwide.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">📱</div>
+                    <h3>Easy Onboarding</h3>
+                    <p>Seamless social login with Google, Apple, and MetaMask integration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How BlockCast Works in 5 Easy Steps</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Join & Verify</h3>
+                        <ul>
+                            <li>Sign up instantly with email or social media (Google, Facebook, Twitter)</li>
+                            <li>Complete quick KYC verification - Level 1 is instant</li>
+                            <li>Level 2 takes under 12 hours and unlocks more features</li>
+                            <li>Higher verification levels unlock higher limits</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Add Funds</h3>
+                        <ul>
+                            <li>Bank transfer (global coverage)</li>
+                            <li>Mobile money (M-Pesa, MTN, Airtel)</li>
+                            <li>Card payments (Stripe, Flutterwave)</li>
+                            <li>Funds convert instantly to BLCT tokens at transparent rates</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Participate in Markets</h3>
+                        <ul>
+                            <li>Browse truth markets by category (Politics, Economics, Health, etc.)</li>
+                            <li>Predict outcomes: Bet BLCT tokens on True or False claims</li>
+                            <li>Contribute evidence: Submit proof to verify statements</li>
+                            <li>Vote on truth: Your "Truth Score" determines voting weight</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Win & Withdraw</h3>
+                        <ul>
+                            <li>Winning positions automatically convert to BLCT tokens</li>
+                            <li>Funds appear in your wallet within minutes</li>
+                            <li>Withdraw to bank account or mobile money service</li>
+                            <li>Track your accuracy score to build reputation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Engage & Create</h3>
+                        <ul>
+                            <li>Create your own truth markets (up to 3/day for Level 1, unlimited for Level 2)</li>
+                            <li>Join the African Truth Community</li>
+                            <li>Discuss news and events with other members</li>
+                            <li>Access specialized communities focused on African content</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer">
+        <div class="container">
+            <h2>Building a Truthful Information Ecosystem</h2>
+            <p>
+                With BlockCast, you're not just predicting outcomes—you're building a more truthful information ecosystem, 
+                especially for African news and perspectives. Join the fight against misinformation today.
+            </p>
+            <br>
+            <a href="#" class="cta-button">Get Started Now</a>
+        </div>
+    </section>
+</body>
+</html>
