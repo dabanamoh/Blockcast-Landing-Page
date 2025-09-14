@@ -225,6 +225,20 @@ const CombinedLandingPage = () => {
     );
   };
 
+  // Generate random positions for the extra circles on the left side
+  const generateRandomPositionLeft = () => {
+    // Generate random positions within the left side of the viewport (0% to 40% width)
+    const posX = Math.random() * 40; // 0% to 40% of the width
+    const posY = Math.random() * 80 + 10; // 10% to 90% of the height
+    return { left: `${posX}%`, top: `${posY}%` };
+  };
+
+  // Generate random sizes for the extra circles (smaller than the original)
+  const getRandomSize = () => {
+    const sizes = ['small', 'medium'];
+    return sizes[Math.floor(Math.random() * sizes.length)];
+  };
+
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Snow container - for snowfall effect */}
@@ -255,7 +269,19 @@ const CombinedLandingPage = () => {
             {/* Hero Section - With phone image */}
             <div className="py-4">
               <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 w-full min-h-screen">
-                <div className="md:w-1/2 text-center md:text-right">
+                {/* Left side content with animated circles */}
+                <div className="md:w-1/2 text-center md:text-right relative" style={{ zIndex: 0 }}>
+                  {/* Extra animated circles positioned randomly on the left side */}
+                  <div style={{ ...generateRandomPositionLeft(), position: 'absolute', zIndex: -1 }}>
+                    <AnimatedCircle size={getRandomSize()} />
+                  </div>
+                  <div style={{ ...generateRandomPositionLeft(), position: 'absolute', zIndex: -1 }}>
+                    <AnimatedCircle size={getRandomSize()} />
+                  </div>
+                  <div style={{ ...generateRandomPositionLeft(), position: 'absolute', zIndex: -1 }}>
+                    <AnimatedCircle size={getRandomSize()} />
+                  </div>
+                  
                   <h1 className="text-3xl sm:text-4xl md:text-6xl font-light mb-6">
                     <img src={logo} alt="BlockCast Logo" className="h-[80px] w-auto inline-block" />
                   </h1>
@@ -274,7 +300,7 @@ const CombinedLandingPage = () => {
                     src="/assets/Phone-Phone-still.gif" 
                     alt="BlockCast App Preview" 
                     className="max-w-full h-auto rounded-lg shadow-2xl"
-                    style={{ transform: 'scale(0.86)', transformOrigin: 'center' }}
+                    style={{ transform: 'scale(1.032)', transformOrigin: 'center' }}
                   />
                 </div>
               </div>
